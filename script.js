@@ -1,3 +1,13 @@
+let result = '';
+function appendValue(value) {
+    result += value;
+    document.getElementById('result').value = result;
+}
+function clearResult() {
+    result = '';
+    document.getElementById('result').value = result;
+}
+
 let operator = '';
 let firstOperand = '';
 
@@ -37,3 +47,25 @@ function calculate() {
         operator = '';
     }
 }
+
+function enableCalculateButton() {
+    document.querySelector('button[onclick="calculate()"]').disabled = (firstOperand === '' || operator === '');
+}
+
+function appendValue(value) {
+    result += value;
+    document.getElementById('result').value = result;
+    enableCalculateButton();
+}
+
+function operate(op) {
+    if (result !== '') {
+        firstOperand = result;
+        operator = op;
+        result = '';
+        document.getElementById('result').value = result;
+        enableCalculateButton();
+    }
+}
+
+clearResult();
